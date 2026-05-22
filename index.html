@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>David Yang — Design Engineer</title>
+  <meta name="description" content="David Yang is a design engineer, co-founder of Pursuit, and former architect. Portfolio spanning AI-native tools, non-profit tech, event platforms, and supertall skyscrapers.">
+  <meta name="author" content="David Yang">
+  <meta name="theme-color" content="#ffffff">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="David Yang — Design Engineer">
+  <meta property="og:description" content="Former architect turned social entrepreneur and AI-native. Co-founder of Pursuit, building at the intersection of taste, craft, and code.">
+  <meta property="og:image" content="images/pursuit-neon.jpg">
+  <meta property="og:site_name" content="David Yang Portfolio">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="David Yang — Design Engineer">
+  <meta name="twitter:description" content="Former architect turned social entrepreneur and AI-native. Co-founder of Pursuit, building at the intersection of taste, craft, and code.">
+  <meta name="twitter:image" content="images/pursuit-neon.jpg">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="72x72" href="favicon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* Metric-matched fallback so hero text doesn't reflow when Inter loads */
+    @font-face {
+      font-family: 'Inter Fallback';
+      src: local('Arial');
+      size-adjust: 107.4%;
+      ascent-override: 90%;
+      descent-override: 22%;
+      line-gap-override: 0%;
+    }
+
+    html {
+      height: 100%;
+      overflow: hidden; /* prevent html from acting as a second scroll container */
+    }
+
+    body {
+      font-family: 'Inter', 'Inter Fallback', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #fff;
+      color: #111;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      height: 100%;
+      overflow-y: scroll;
+      overflow-x: hidden;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior-y: none;
+      scroll-snap-type: y mandatory;
+    }
+
+    a { color: inherit; }
+
+    /* ── Navigation ─────────────────────────────────────────────── */
+    .site-avatar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 100;
+      padding: 28px 80px;
+      line-height: 0;
+      text-decoration: none;
+      cursor: pointer;
+      animation: heroFade 0.85s ease-out both;
+    }
+
+    .site-avatar img {
+      display: block;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: 1px solid #ddd;
+      object-fit: cover;
+      object-position: center;
+      background: #fff;
+    }
+
+    /* ── Slide base ─────────────────────────────────────────────── */
+    .slide {
+      height: 100vh;
+      min-height: 100vh;
+      max-height: 100vh;
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+      overflow: hidden;
+      position: relative;
+      box-sizing: border-box;
+    }
+
+    @supports (height: 100dvh) {
+      .slide {
+        height: 100dvh;
+        min-height: 100dvh;
+        max-height: 100dvh;
+      }
+    }
+
+    /* ── Hero Slide ─────────────────────────────────────────────── */
+    .slide--hero {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0 80px;
+      background: #fff;
+      min-height: 0;
+    }
+
+    .hero-eyebrow {
+      font-size: 11px;
+      font-weight: 300;
+      color: #999;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      line-height: 1.4;
+      margin-bottom: 20px;
+      animation: heroFade 0.85s ease-out both;
+    }
+
+    .hero-name {
+      font-size: clamp(42px, 6.4vw, 86px);
+      font-weight: 500;
+      letter-spacing: -0.035em;
+      line-height: 0.94;
+      margin-left: -0.06em;
+      margin-bottom: 24px;
+      animation: heroFade 0.85s ease-out both;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(14px, 1.7vw, 18px);
+      font-weight: 300;
+      color: #777;
+      margin-bottom: 32px;
+      line-height: 1.55;
+      animation: heroFade 0.85s ease-out both;
+    }
+
+    .hero-bio {
+      font-size: clamp(13px, 1.3vw, 15px);
+      font-weight: 300;
+      color: #555;
+      line-height: 1.8;
+      max-width: 560px;
+      animation: heroFade 0.85s ease-out both;
+      min-height: 0;
+      overflow-y: auto;
+      overscroll-behavior-y: contain;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .hero-bio p + p { margin-top: 1em; }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 36px;
+      left: 80px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 11px;
+      font-weight: 400;
+      color: #888;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      line-height: 1.4;
+      animation: heroFade 0.85s ease-out 0.35s both;
+      user-select: none;
+    }
+
+    .scroll-hint-icon { animation: nudge 2s ease-in-out infinite; }
+
+    @keyframes nudge {
+      0%, 100% { transform: translateY(0); }
+      55%       { transform: translateY(5px); }
+    }
+
+    /* ── Project Slides ─────────────────────────────────────────── */
+    .slide--project {
+      display: flex;
+      flex-direction: column;
+      padding: 32px 60px 48px;
+      min-height: 0;
+    }
+
+    /* Media */
+    .project-media {
+      width: 100%;
+      height: 60vh;
+      max-height: 60vh;
+      border-radius: 6px;
+      overflow: hidden;
+      background: #f0f0f0;
+      flex-shrink: 0;
+      margin-bottom: 24px;
+      opacity: 0;
+      transform: translateY(32px);
+      will-change: transform, opacity;
+      transition: opacity 1.4s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .project-media img,
+    .project-media video {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Media gallery */
+    .project-media.media-gallery {
+      position: relative;
+    }
+
+    .media-gallery-viewport {
+      position: absolute;
+      inset: 0;
+    }
+
+    .media-gallery-slide {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 0.55s ease, transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .media-gallery-slide.is-active {
+      opacity: 1;
+    }
+
+    .media-gallery-nav {
+      position: absolute;
+      top: 50%;
+      z-index: 2;
+      width: 36px;
+      height: 36px;
+      padding: 0;
+      border: none;
+      background: none;
+      color: #fff;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0.55;
+      transform: translateY(-50%);
+      filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.35));
+      transition: opacity 0.2s;
+    }
+
+    .media-gallery-nav:hover {
+      opacity: 0.95;
+    }
+
+    .media-gallery-nav--prev { left: 14px; }
+    .media-gallery-nav--next { right: 14px; }
+
+    .media-gallery-nav svg {
+      display: block;
+      width: 18px;
+      height: 18px;
+    }
+
+    .project-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(155deg, #0c0c0c 0%, #161628 60%, #0c0c0c 100%);
+    }
+
+    .placeholder-label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.22);
+    }
+
+    /* Content */
+    .project-content {
+      display: grid;
+      grid-template-columns: 52px 1fr;
+      align-items: start;
+      align-content: start;
+      max-width: 860px;
+      overflow: hidden;
+      flex: 0 0 auto;
+      opacity: 0;
+      transform: translateY(20px);
+      will-change: transform, opacity;
+      transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.35s,
+                  transform 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.35s;
+    }
+
+    .project-number {
+      grid-column: 1 / 2;
+      grid-row: 1;
+      font-size: 11px;
+      font-weight: 400;
+      color: #c0c0c0;
+      letter-spacing: 0.1em;
+      font-variant-numeric: tabular-nums;
+      padding-top: 5px;
+    }
+
+    .project-title {
+      grid-column: 2 / 3;
+      grid-row: 1;
+      font-size: clamp(20px, 2.4vw, 28px);
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      margin-bottom: 12px;
+    }
+
+    .project-description {
+      grid-column: 2 / 3;
+      font-size: 14px;
+      font-weight: 400;
+      color: #555;
+      line-height: 1.8;
+      margin-bottom: 14px;
+    }
+
+    .project-meta {
+      grid-column: 2 / 3;
+      margin-bottom: 18px;
+    }
+
+    .project-funders,
+    .project-press {
+      font-size: 12px;
+      color: #aaa;
+      line-height: 1.65;
+      margin-bottom: 3px;
+    }
+
+    .project-press a {
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      color: #aaa;
+      transition: color 0.15s;
+    }
+
+    .project-press a:hover { color: #333; }
+
+    /* ── Pursuit: description + logos side by side ──────────────── */
+    .project-content--wide {
+      max-width: 100%;
+      width: 100%;
+    }
+
+    .project-body-row {
+      grid-column: 2 / 3;
+      display: grid;
+      grid-template-columns: minmax(0, 808px) minmax(0, 1fr);
+      gap: clamp(20px, 3vw, 48px);
+      align-items: start;
+      margin-bottom: 14px;
+      min-width: 0;
+      width: 100%;
+    }
+
+    .project-body-row .project-description {
+      grid-column: auto;
+      min-width: 0;
+      margin-bottom: 0;
+    }
+
+    .project-partners {
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      padding-top: 2px;
+    }
+
+    .project-partners-label {
+      font-size: 10px;
+      font-weight: 400;
+      color: #bbb;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+      white-space: nowrap;
+    }
+
+    .project-partners-logos {
+      display: flex;
+      flex-wrap: nowrap;
+      gap: clamp(4px, 0.9vw, 14px);
+      align-items: center;
+      width: 100%;
+      min-width: 0;
+    }
+
+    .project-partners-logos svg,
+    .project-partners-logos img {
+      height: auto;
+      width: auto;
+      max-width: 100%;
+      flex: 0 1 auto;
+      opacity: 0.45;
+      transition: opacity 0.2s;
+    }
+
+    .project-partners-logos svg:hover,
+    .project-partners-logos img:hover {
+      opacity: 0.75;
+    }
+
+    .project-partners-logos img {
+      object-fit: contain;
+    }
+
+    .project-partners-logos img.logo-invert {
+      filter: invert(1) grayscale(1);
+    }
+
+    .project-partners-logos img.logo-grayscale {
+      filter: grayscale(1) contrast(1.2);
+    }
+
+    /* Per-logo max heights — scale down together on resize */
+    .project-partners-logos img[alt="Google"] { max-height: clamp(16px, 3.2vw, 44px); }
+    .project-partners-logos img[alt="Robin Hood Foundation"] { max-height: clamp(14px, 2.6vw, 35px); }
+    .project-partners-logos img[alt="Blackstone"] { max-height: clamp(10px, 1.8vw, 25px); }
+    .project-partners-logos img[alt="USV"] { max-height: clamp(14px, 2.6vw, 35px); }
+    .project-partners-logos img[alt="Siegel Family Endowment"] { max-height: clamp(12px, 2.2vw, 29px); }
+    .project-partners-logos img[alt="The New York Times"] { max-height: clamp(10px, 1.4vw, 16px); }
+    .project-partners-logos img[alt="TechCrunch"] { max-height: clamp(14px, 3.2vw, 45px); }
+    .project-partners-logos img[alt="Bloomberg"] { max-height: clamp(10px, 1.4vw, 16px); }
+
+    /* Pursuit: stack logos under text when side-by-side gets too tight */
+    @media (max-width: 1100px) {
+      .project-body-row {
+        grid-template-columns: 1fr;
+        gap: 28px;
+      }
+
+      .project-partners-logos img[alt="Google"] { max-height: 44px; }
+      .project-partners-logos img[alt="Robin Hood Foundation"] { max-height: 35px; }
+      .project-partners-logos img[alt="Blackstone"] { max-height: 25px; }
+      .project-partners-logos img[alt="USV"] { max-height: 35px; }
+      .project-partners-logos img[alt="Siegel Family Endowment"] { max-height: 29px; }
+      .project-partners-logos img[alt="The New York Times"] { max-height: 16px; }
+      .project-partners-logos img[alt="TechCrunch"] { max-height: 45px; }
+      .project-partners-logos img[alt="Bloomberg"] { max-height: 16px; }
+    }
+
+    @media (max-width: 768px) {
+      .project-body-row {
+        gap: 24px;
+      }
+
+      .project-partners-logos {
+        gap: 10px;
+      }
+
+      .project-partners-logos img[alt="Google"] { max-height: 36px; }
+      .project-partners-logos img[alt="Robin Hood Foundation"] { max-height: 28px; }
+      .project-partners-logos img[alt="Blackstone"] { max-height: 20px; }
+      .project-partners-logos img[alt="USV"] { max-height: 28px; }
+      .project-partners-logos img[alt="Siegel Family Endowment"] { max-height: 24px; }
+      .project-partners-logos img[alt="The New York Times"] { max-height: 14px; }
+      .project-partners-logos img[alt="TechCrunch"] { max-height: 36px; }
+      .project-partners-logos img[alt="Bloomberg"] { max-height: 14px; }
+    }
+
+    @media (max-width: 520px) {
+      .project-partners-logos {
+        flex-wrap: wrap;
+        row-gap: 12px;
+      }
+    }
+
+    .project-link-btn {
+      grid-column: 2 / 3;
+      display: inline-flex;
+      align-items: center;
+      padding: 9px 20px;
+      background: #111;
+      color: #fff;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      border-radius: 100px;
+      letter-spacing: 0.01em;
+      width: fit-content;
+      opacity: 0;
+      transform: translateY(8px);
+      will-change: transform, opacity;
+      transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1) 1.05s,
+                  transform 0.9s cubic-bezier(0.16, 1, 0.3, 1) 1.05s,
+                  background 0.15s;
+    }
+
+    .project-link-btn:hover { background: #333; }
+
+    /* Active: slide in view */
+    .slide--project.active .project-media {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .slide--project.active .project-content {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .slide--project.active .project-link-btn {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── Animations ─────────────────────────────────────────────── */
+    @keyframes heroFade {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .site-avatar,
+      .hero-eyebrow,
+      .hero-name,
+      .hero-subtitle,
+      .hero-bio,
+      .scroll-hint {
+        animation: none;
+        opacity: 1;
+      }
+
+      .scroll-hint-icon { animation: none; }
+    }
+
+    /* ── Responsive ─────────────────────────────────────────────── */
+    @media (max-width: 1024px) {
+      .slide--hero { padding: 0 52px; }
+      .site-avatar { padding-left: 52px; padding-right: 52px; }
+      .scroll-hint { left: 52px; }
+      .slide--project { padding: 28px 48px 40px; }
+    }
+
+    @media (max-width: 768px) {
+      .slide--hero { padding: 0 28px; }
+      .site-avatar { padding-left: 28px; padding-right: 28px; }
+      .scroll-hint { left: 28px; bottom: 28px; }
+      .slide--project { padding: 20px 24px 32px; }
+      .project-media { height: 50vh; max-height: 50vh; }
+      .project-content { grid-template-columns: 40px 1fr; }
+    }
+
+    @media (max-height: 820px) {
+      .project-media { height: 46vh; max-height: 46vh; }
+      .slide--project { padding-top: 24px; padding-bottom: 32px; }
+    }
+
+    /* ── Resume / Contact Slide ────────────────────────────────── */
+    .slide--resume {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0 80px;
+      background: #fff;
+      min-height: 0;
+      overflow-y: auto;
+      overscroll-behavior-y: contain;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .resume-name {
+      font-size: clamp(42px, 6.4vw, 86px);
+      font-weight: 500;
+      letter-spacing: -0.035em;
+      line-height: 0.94;
+      margin-bottom: 24px;
+    }
+
+    .resume-subtitle {
+      font-size: clamp(14px, 1.7vw, 18px);
+      font-weight: 300;
+      color: #777;
+      margin-bottom: 20px;
+      line-height: 1.55;
+    }
+
+    .resume-experience,
+    .resume-education {
+      list-style: none;
+      max-width: 560px;
+      margin-bottom: 40px;
+    }
+
+    .resume-education {
+      margin-bottom: 48px;
+    }
+
+    .resume-experience li,
+    .resume-education li {
+      font-size: clamp(13px, 1.3vw, 15px);
+      font-weight: 300;
+      color: #555;
+      line-height: 1.8;
+      padding-left: 16px;
+      position: relative;
+    }
+
+    .resume-experience li::before,
+    .resume-education li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.85em;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: #ccc;
+    }
+
+    .resume-experience li + li,
+    .resume-education li + li {
+      margin-top: 8px;
+    }
+
+    .resume-role {
+      font-weight: 400;
+      color: #111;
+    }
+
+    .resume-socials {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .resume-socials a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #999;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .resume-socials a:hover {
+      color: #111;
+    }
+
+    .resume-socials svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .slide--resume .resume-name,
+    .slide--resume .resume-subtitle,
+    .slide--resume .resume-experience,
+    .slide--resume .resume-education,
+    .slide--resume .resume-socials {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .slide--resume .resume-subtitle { transition-delay: 0.08s; }
+    .slide--resume .resume-experience { transition-delay: 0.16s; }
+    .slide--resume .resume-education { transition-delay: 0.24s; }
+    .slide--resume .resume-socials { transition-delay: 0.32s; }
+
+    .slide--resume.active .resume-name,
+    .slide--resume.active .resume-subtitle,
+    .slide--resume.active .resume-experience,
+    .slide--resume.active .resume-education,
+    .slide--resume.active .resume-socials {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 1024px) {
+      .slide--resume { padding: 0 52px; }
+    }
+
+    @media (max-width: 768px) {
+      .slide--resume { padding: 0 28px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .slide--resume .resume-name,
+      .slide--resume .resume-subtitle,
+      .slide--resume .resume-experience,
+      .slide--resume .resume-education,
+      .slide--resume .resume-socials {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+    }
+  </style>
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "David Yang",
+    "jobTitle": "Design Engineer",
+    "description": "Former architect turned social entrepreneur and AI-native. Co-founder of Pursuit.",
+    "knowsAbout": ["Design Engineering", "AI Tools", "Non-profit Technology", "Architecture", "Product Design"],
+    "affiliation": {
+      "@type": "Organization",
+      "name": "Pursuit",
+      "url": "https://pursuit.org"
+    },
+    "sameAs": [
+      "https://pursuit.org",
+      "https://yearofproject.com"
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <a href="#" class="site-avatar" id="avatar-home">
+    <img src="images/avatar.png" alt="David Yang" width="34" height="34">
+  </a>
+
+  <!-- Slide 0: Hero -->
+  <section class="slide slide--hero">
+    <p class="hero-eyebrow">a16z Design Engineer Fellowship Portfolio</p>
+    <h1 class="hero-name">David Yang</h1>
+    <p class="hero-subtitle">Former architect turned social entrepreneur and AI-native</p>
+    <div class="hero-bio">
+      <p>I started my career drawing supertall skyscrapers — buildings where every decision is a systems decision. A decade ago I walked away from that to co-found Pursuit, a non-profit that has moved thousands of adults from $18K to $90K+ careers in tech. Last year we rebuilt the whole organization around AI: new tools, new workflows, new ways of thinking about how a team produces work at scale.</p>
+      <p>I came to design engineering the same way I came to everything else — by refusing to stop at the edge of my role. I started vibe-coding because I needed to ship things my team couldn't. I rebuilt our annual 400-person gala's entire design process using AI because a one-person team shouldn't have limits. I built event management software, training platforms, and internal tools because the gap between "designed" and "shipped" was one I kept choosing to close myself.</p>
+      <p>I think in systems. I care about the last 20%. I believe the most interesting work right now lives exactly at the intersection of taste, craft, and code — and I've been living there for a while.</p>
+    </div>
+    <div class="scroll-hint">
+      <svg class="scroll-hint-icon" width="11" height="11" viewBox="0 0 11 11" fill="none"
+           stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="5.5" y1="1" x2="5.5" y2="10"/>
+        <polyline points="2,6.5 5.5,10 9,6.5"/>
+      </svg>
+      Scroll
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <main id="gallery">
+
+    <!-- 01 ─ Pursuit -->
+    <article class="slide slide--project">
+      <div class="project-media media-gallery" data-interval="3000">
+        <div class="media-gallery-viewport">
+          <img class="media-gallery-slide is-active" src="images/pursuit-neon.jpg" alt="Pursuit" loading="lazy">
+          <img class="media-gallery-slide" src="images/pursuit-portrait.jpg" alt="Pursuit" loading="lazy">
+        </div>
+        <button type="button" class="media-gallery-nav media-gallery-nav--prev" aria-label="Previous image">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg>
+        </button>
+        <button type="button" class="media-gallery-nav media-gallery-nav--next" aria-label="Next image">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+        </button>
+      </div>
+      <div class="project-content project-content--wide">
+        <span class="project-number">01</span>
+        <h2 class="project-title">Pursuit</h2>
+        <div class="project-body-row">
+          <div class="project-description">
+            <p>I co-founded a non-profit that creates job pathways for low-income adults. For the past decade we've produced life-changing outcomes for participants — who go from $18K to over $94K working at companies like Uber, Blackstone, Citi, and Peloton.</p>
+            <p style="margin-top: 1em;">In the past year we've completely transformed — now fully teaching AI and placing participants into AI jobs. We've also launched pilots to train other non-profits and small and medium businesses in AI.</p>
+          </div>
+          <div class="project-partners">
+            <span class="project-partners-label">Select Funders &amp; Partners</span>
+            <div class="project-partners-logos">
+              <img src="images/logo-google.png" alt="Google" class="logo-grayscale">
+              <img src="images/logo-robinhood.png" alt="Robin Hood Foundation" class="logo-invert">
+              <img src="images/logo-siegel.png" alt="Siegel Family Endowment" class="logo-grayscale">
+              <img src="images/logo-blackstone.png" alt="Blackstone" class="logo-invert">
+              <img src="images/logo-usv.png" alt="USV" class="logo-invert">
+            </div>
+            <span class="project-partners-label" style="margin-top: 14px;">Featured Press</span>
+            <div class="project-partners-logos">
+              <img src="images/logo-nyt.png" alt="The New York Times">
+              <img src="images/logo-techcrunch.png" alt="TechCrunch" class="logo-invert">
+              <img src="images/logo-bloomberg.png" alt="Bloomberg">
+            </div>
+          </div>
+        </div>
+        <a href="https://www.pursuit.org/" target="_blank" rel="noopener" class="project-link-btn">Visit Pursuit →</a>
+      </div>
+    </article>
+
+    <!-- 02 ─ Bash Design -->
+    <article class="slide slide--project">
+      <div class="project-media media-gallery" data-interval="3000">
+        <div class="media-gallery-viewport">
+          <img class="media-gallery-slide is-active" src="images/bash-design-01.jpg" alt="Pursuit Bash 2025 — AI-Powered Design" loading="lazy">
+          <img class="media-gallery-slide" src="images/bash-design-02.jpg" alt="Pursuit Bash 2025 — AI-Powered Design" loading="lazy">
+          <img class="media-gallery-slide" src="images/bash-design-03.jpg" alt="Pursuit Bash 2025 — AI-Powered Design" loading="lazy">
+          <img class="media-gallery-slide" src="images/bash-design-04.jpg" alt="Pursuit Bash 2025 — AI-Powered Design" loading="lazy">
+          <img class="media-gallery-slide" src="images/bash-design-05.jpg" alt="Pursuit Bash 2025 — AI-Powered Design" loading="lazy">
+          <img class="media-gallery-slide" src="images/bash-design-06.jpg" alt="Pursuit Bash 2025 — AI-Powered Design" loading="lazy">
+          <img class="media-gallery-slide" src="images/bash-design-07.jpg" alt="Pursuit Bash 2025 — AI-Powered Design" loading="lazy">
+        </div>
+        <button type="button" class="media-gallery-nav media-gallery-nav--prev" aria-label="Previous image">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg>
+        </button>
+        <button type="button" class="media-gallery-nav media-gallery-nav--next" aria-label="Next image">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+        </button>
+      </div>
+      <div class="project-content">
+        <span class="project-number">02</span>
+        <h2 class="project-title">“Let’s Build” — AI Gala Creative Direction</h2>
+        <p class="project-description">The Pursuit Bash is our 400-person annual gala — and in 2025, as Pursuit marked its shift to an AI-native organization, the event became a pivotal celebration of that transformation. Instead of hiring an external agency, I served as creative director alongside one designer, bringing the work in-house and using AI to do what would normally require a much larger team: environmental design, collateral, large-format artwork, copy, and production. The result was a fully immersive “Let’s Build” experience — construction-site wayfinding, wheat-pasted portrait galleries, and AI-generated art refined until it felt human, not synthetic.</p>
+        <a href="https://www.pursuit.org/blog/bash2025-design-with-ai" target="_blank" rel="noopener" class="project-link-btn">Read More →</a>
+      </div>
+    </article>
+
+    <!-- 03 ─ Bash Track -->
+    <article class="slide slide--project">
+      <div class="project-media media-gallery" data-interval="3000">
+        <div class="media-gallery-viewport">
+          <img class="media-gallery-slide is-active" src="images/bash-app-01.png" alt="Bash Track — Event Management Platform" loading="lazy">
+          <img class="media-gallery-slide" src="images/bash-app-02.png" alt="Bash Track — Event Management Platform" loading="lazy">
+        </div>
+        <button type="button" class="media-gallery-nav media-gallery-nav--prev" aria-label="Previous image">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg>
+        </button>
+        <button type="button" class="media-gallery-nav media-gallery-nav--next" aria-label="Next image">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+        </button>
+      </div>
+      <div class="project-content">
+        <span class="project-number">03</span>
+        <h2 class="project-title">Bash Track — Event Management Software</h2>
+        <p class="project-description">Bash Track is a full-featured event management platform built solo in 3 months and used to run Pursuit's 2025 Annual Gala. It enables hosts to manage personalized guest lists and track RSVPs in real time, and supports text-to-pledge so guests can donate on the spot. It gives administrators complete visibility into seating, dietary preferences, check-in data, and communications, all in one place.</p>
+      </div>
+    </article>
+
+    <!-- 04 ─ AI Training Software -->
+    <article class="slide slide--project">
+      <div class="project-media">
+        <img src="images/pursuit-portraits.gif" alt="AI Training Software — Pursuit Learning Platform" loading="lazy">
+      </div>
+      <div class="project-content">
+        <span class="project-number">04</span>
+        <h2 class="project-title">AI Training Software <span style="font-size:0.62em;font-weight:300;color:#bbb;letter-spacing:0.01em">beta</span></h2>
+        <p class="project-description">Pursuit's pilot platform is an all-in-one learning and career management system that guides program participants from onboarding through job placement — with AI-powered daily learning, attendance tracking, assessments, and a built-in job search tracker. Staff get real-time dashboards and analytics across every cohort, while builders stay on track with personalized goal-setting, networking tools, and progress visibility throughout the program.</p>
+      </div>
+    </article>
+
+    <!-- 05 ─ Architecture -->
+    <article class="slide slide--project">
+      <div class="project-media">
+        <video autoplay loop muted playsinline preload="auto">
+          <source src="images/kpf-lotte.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="project-content">
+        <span class="project-number">05</span>
+        <h2 class="project-title">Architecture</h2>
+        <p class="project-description">In a previous life, I worked as an architect on <em>actual buildings</em> — supertall skyscrapers, including one of the tallest in Asia.</p>
+        <a href="https://www.kpf.com/project/lotte-world-tower" target="_blank" rel="noopener" class="project-link-btn">View Project →</a>
+      </div>
+    </article>
+
+    <!-- 06 ─ Year of Project -->
+    <article class="slide slide--project">
+      <div class="project-media">
+        <video autoplay loop muted playsinline preload="auto">
+          <source src="images/hero-combined-web.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="project-content">
+        <span class="project-number">06</span>
+        <h2 class="project-title">“Year Of” Project</h2>
+        <p class="project-description">In 2019 I launched a personal experiment in deliberate learning. Each year I choose a single theme and explore it deeply—from wine and photography to music, sports, and now cooking. My 'Year Of' site is where I document my journey.</p>
+        <a href="https://www.yearofproject.com/" target="_blank" rel="noopener" class="project-link-btn">Visit →</a>
+      </div>
+    </article>
+
+  </main>
+
+  <!-- Resume / Contact -->
+  <section class="slide slide--resume">
+    <h2 class="resume-name">About Me</h2>
+    <p class="resume-subtitle">Experience</p>
+    <ul class="resume-experience">
+      <li><span class="resume-role">Co-founder &amp; Chief Product Officer, Pursuit</span> — Non-profit creating job pathways for low-income adults into $90K+ tech careers</li>
+      <li><span class="resume-role">Co-founder and Chief Design Officer, Classroom Blueprint</span> — Online platform for sharing and discovering best practices in classroom design</li>
+      <li><span class="resume-role">Architect, Kohn Pedersen Fox</span> — Designed supertall skyscrapers including Lotte World Tower, Seoul</li>
+    </ul>
+    <p class="resume-subtitle">Education</p>
+    <ul class="resume-education">
+      <li><span class="resume-role">Yale University, M.Arch II</span> — Post-professional degree in architecture</li>
+      <li><span class="resume-role">Cornell University, B.Arch</span> — Bachelor of Architecture</li>
+    </ul>
+    <div class="resume-socials">
+      <!-- LinkedIn -->
+      <a href="https://www.linkedin.com/in/davidyang" target="_blank" rel="noopener" aria-label="LinkedIn">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      </a>
+      <!-- X / Twitter -->
+      <a href="https://x.com/davidyang" target="_blank" rel="noopener" aria-label="X">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      </a>
+      <!-- GitHub -->
+      <a href="https://github.com/davidyang" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+      </a>
+      <!-- Email -->
+      <a href="mailto:david@pursuit.org" aria-label="Email">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4L12 13 2 4"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <script>
+    const scroller = document.body;
+    const slides = [...document.querySelectorAll('.slide')];
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let scrollLocked = false;
+    let wheelLocked = false;
+
+    function slideTop(slide) {
+      return slide.getBoundingClientRect().top + scroller.scrollTop;
+    }
+
+    function nearestSlideIndex() {
+      const y = scroller.scrollTop;
+      let best = 0;
+      let bestDist = Infinity;
+      slides.forEach((slide, index) => {
+        const dist = Math.abs(slideTop(slide) - y);
+        if (dist < bestDist) {
+          bestDist = dist;
+          best = index;
+        }
+      });
+      return best;
+    }
+
+    function scrollableAncestor(node) {
+      return node?.closest('.hero-bio, .project-content, .slide--resume');
+    }
+
+    function canScrollWithin(el, delta) {
+      if (!el || el.scrollHeight <= el.clientHeight + 1) return false;
+      if (delta > 0) {
+        return el.scrollTop + el.clientHeight < el.scrollHeight - 1;
+      }
+      return el.scrollTop > 0;
+    }
+
+    function goToSlide(index, instant = false) {
+      index = Math.max(0, Math.min(slides.length - 1, index));
+      scrollLocked = true;
+      scroller.scrollTo({
+        top: slideTop(slides[index]),
+        behavior: instant || prefersReducedMotion ? 'instant' : 'smooth',
+      });
+      window.setTimeout(() => {
+        scrollLocked = false;
+      }, instant || prefersReducedMotion ? 0 : 700);
+    }
+
+    function snapToNearest(instant = false) {
+      if (scrollLocked || wheelLocked) return;
+      const index = nearestSlideIndex();
+      const target = slideTop(slides[index]);
+      if (Math.abs(scroller.scrollTop - target) < 4) return;
+      goToSlide(index, instant);
+    }
+
+    // ─── Avatar: scroll to top ─────────────────────────────────────────────
+    document.getElementById('avatar-home').addEventListener('click', (e) => {
+      e.preventDefault();
+      goToSlide(0, true);
+    });
+
+    // ─── Slide scroll control ──────────────────────────────────────────────
+    window.addEventListener('wheel', (e) => {
+      if (scrollLocked || wheelLocked) {
+        e.preventDefault();
+        return;
+      }
+
+      if (Math.abs(e.deltaY) < 18) return;
+
+      const nested = scrollableAncestor(e.target);
+      if (nested && canScrollWithin(nested, e.deltaY)) return;
+
+      const index = nearestSlideIndex();
+      if (e.deltaY > 0 && index < slides.length - 1) {
+        e.preventDefault();
+        wheelLocked = true;
+        goToSlide(index + 1);
+        window.setTimeout(() => { wheelLocked = false; }, 750);
+      } else if (e.deltaY < 0 && index > 0) {
+        e.preventDefault();
+        wheelLocked = true;
+        goToSlide(index - 1);
+        window.setTimeout(() => { wheelLocked = false; }, 750);
+      }
+    }, { passive: false });
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key !== 'ArrowDown' && e.key !== 'ArrowUp' && e.key !== 'PageDown' && e.key !== 'PageUp') return;
+      if (scrollLocked || wheelLocked) return;
+
+      const index = nearestSlideIndex();
+      const down = e.key === 'ArrowDown' || e.key === 'PageDown';
+      const up = e.key === 'ArrowUp' || e.key === 'PageUp';
+      if (down && index < slides.length - 1) {
+        e.preventDefault();
+        goToSlide(index + 1);
+      } else if (up && index > 0) {
+        e.preventDefault();
+        goToSlide(index - 1);
+      }
+    });
+
+    scroller.addEventListener('scrollend', () => snapToNearest(false), { passive: true });
+
+    let scrollSnapTimer;
+    scroller.addEventListener('scroll', () => {
+      if (scrollLocked || wheelLocked) return;
+      clearTimeout(scrollSnapTimer);
+      scrollSnapTimer = window.setTimeout(() => snapToNearest(false), 140);
+    }, { passive: true });
+
+    // ─── Slide entrance animations ────────────────────────────────────────
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.35, rootMargin: '0px 0px -5% 0px' });
+
+    document.querySelectorAll('.slide--project, .slide--resume').forEach(s => observer.observe(s));
+
+    // ─── Media galleries ──────────────────────────────────────────────────
+    document.querySelectorAll('.media-gallery').forEach(gallery => {
+      const slides = [...gallery.querySelectorAll('.media-gallery-slide')];
+      if (slides.length <= 1) return;
+
+      let index = slides.findIndex(slide => slide.classList.contains('is-active'));
+      if (index < 0) {
+        index = 0;
+        slides[0].classList.add('is-active');
+      }
+
+      let timer = null;
+      const interval = parseInt(gallery.dataset.interval, 10) || 3000;
+
+      function show(nextIndex) {
+        index = (nextIndex + slides.length) % slides.length;
+        slides.forEach((slide, i) => slide.classList.toggle('is-active', i === index));
+      }
+
+      function startTimer() {
+        clearInterval(timer);
+        timer = setInterval(() => show(index + 1), interval);
+      }
+
+      function stopTimer() {
+        clearInterval(timer);
+        timer = null;
+      }
+
+      function step(delta) {
+        show(index + delta);
+        startTimer();
+      }
+
+      gallery.querySelector('.media-gallery-nav--prev')?.addEventListener('click', () => step(-1));
+      gallery.querySelector('.media-gallery-nav--next')?.addEventListener('click', () => step(1));
+
+      const galleryObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) startTimer();
+          else stopTimer();
+        });
+      }, { threshold: 0.45 });
+
+      galleryObserver.observe(gallery);
+    });
+  </script>
+
+</body>
+</html>
