@@ -616,11 +616,15 @@
       .site-avatar { padding-left: 28px; padding-right: 28px; }
       .scroll-hint { left: 28px; bottom: 28px; }
       .slide--project { padding: 20px 24px 32px; }
-      .project-media { height: 50vh; max-height: 50vh; }
+      .project-media {
+        height: auto;
+        max-height: none;
+        aspect-ratio: 16 / 10;
+      }
       .project-number { right: calc(100% + 10px); }
     }
 
-    @media (max-height: 820px) {
+    @media (max-height: 820px) and (min-width: 769px) {
       .project-media { height: 46vh; max-height: 46vh; }
       .slide--project { padding-top: 24px; padding-bottom: 32px; }
     }
