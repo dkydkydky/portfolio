@@ -424,6 +424,10 @@
       white-space: nowrap;
     }
 
+    .project-partners-label + .project-partners-logos + .project-partners-label {
+      margin-top: 14px;
+    }
+
     .project-partners-logos {
       display: flex;
       flex-wrap: wrap;
@@ -515,21 +519,25 @@
 
     @media (max-width: 768px) {
       .project-body-row {
-        gap: 24px;
+        gap: 18px;
       }
 
       .project-partners-logos {
-        gap: 10px;
+        gap: 8px;
       }
 
-      .project-partners-logos img[alt="Google"] { max-height: 36px; }
-      .project-partners-logos img[alt="Robin Hood Foundation"] { max-height: 28px; }
-      .project-partners-logos img[alt="Blackstone"] { max-height: 20px; }
-      .project-partners-logos img[alt="USV"] { max-height: 28px; }
-      .project-partners-logos img[alt="Siegel Family Endowment"] { max-height: 24px; }
-      .project-partners-logos img[alt="The New York Times"] { max-height: 14px; }
-      .project-partners-logos img[alt="TechCrunch"] { max-height: 36px; }
-      .project-partners-logos img[alt="Bloomberg"] { max-height: 14px; }
+      .project-partners-label + .project-partners-logos + .project-partners-label {
+        margin-top: 10px;
+      }
+
+      .project-partners-logos img[alt="Google"] { max-height: 32px; }
+      .project-partners-logos img[alt="Robin Hood Foundation"] { max-height: 24px; }
+      .project-partners-logos img[alt="Blackstone"] { max-height: 18px; }
+      .project-partners-logos img[alt="USV"] { max-height: 24px; }
+      .project-partners-logos img[alt="Siegel Family Endowment"] { max-height: 20px; }
+      .project-partners-logos img[alt="The New York Times"] { max-height: 12px; }
+      .project-partners-logos img[alt="TechCrunch"] { max-height: 32px; }
+      .project-partners-logos img[alt="Bloomberg"] { max-height: 12px; }
     }
 
     @media (max-width: 520px) {
@@ -615,13 +623,70 @@
       .slide--hero { padding: 0 28px; }
       .site-avatar { padding-left: 28px; padding-right: 28px; }
       .scroll-hint { left: 28px; bottom: 28px; }
-      .slide--project { padding: 20px 24px 32px; }
+      .slide--project { padding: 16px 24px 24px; }
       .project-media {
         height: auto;
-        max-height: none;
+        max-height: min(24dvh, 176px);
         aspect-ratio: 16 / 10;
+        margin-bottom: 14px;
+      }
+      .project-title {
+        font-size: clamp(18px, 5vw, 22px);
+        line-height: 1.2;
+        margin-bottom: 8px;
+      }
+      .project-description {
+        font-size: 13px;
+        line-height: 1.55;
+        margin-bottom: 10px;
+      }
+      .project-body-row {
+        gap: 18px;
+        margin-bottom: 10px;
+      }
+      .project-body-row .project-description p + p {
+        margin-top: 0.75em;
+      }
+      .project-partners-label {
+        margin-bottom: 4px;
+      }
+      .project-link-btn {
+        padding: 8px 16px;
+        font-size: 12px;
       }
       .project-number { right: calc(100% + 10px); }
+    }
+
+    @media (max-width: 768px) and (max-height: 700px) {
+      .slide--project { padding: 12px 24px 20px; }
+      .project-media {
+        max-height: min(20dvh, 150px);
+        margin-bottom: 12px;
+      }
+      .project-title {
+        font-size: 17px;
+        margin-bottom: 6px;
+      }
+      .project-description {
+        font-size: 12.5px;
+        line-height: 1.5;
+        margin-bottom: 8px;
+      }
+      .project-body-row {
+        gap: 14px;
+        margin-bottom: 8px;
+      }
+      .project-partners-label + .project-partners-logos + .project-partners-label {
+        margin-top: 8px;
+      }
+      .project-partners-logos img[alt="Google"] { max-height: 28px; }
+      .project-partners-logos img[alt="Robin Hood Foundation"] { max-height: 22px; }
+      .project-partners-logos img[alt="Blackstone"] { max-height: 16px; }
+      .project-partners-logos img[alt="USV"] { max-height: 22px; }
+      .project-partners-logos img[alt="Siegel Family Endowment"] { max-height: 18px; }
+      .project-partners-logos img[alt="The New York Times"] { max-height: 11px; }
+      .project-partners-logos img[alt="TechCrunch"] { max-height: 28px; }
+      .project-partners-logos img[alt="Bloomberg"] { max-height: 11px; }
     }
 
     @media (max-height: 820px) and (min-width: 769px) {
@@ -853,8 +918,8 @@
         <h2 class="project-title">Pursuit</h2>
         <div class="project-body-row">
           <div class="project-description">
-            <p>I co-founded a non-profit that creates job pathways for low-income adults. For the past decade we've produced life-changing outcomes for participants — who go from $18K to over $94K working at companies like Uber, Blackstone, Citi, and Peloton.</p>
-            <p style="margin-top: 1em;">In the past year we've completely transformed — now fully teaching AI and placing participants into AI jobs. We've also launched pilots to train other non-profits and small and medium businesses in AI.</p>
+            <p>I co-founded a non-profit that creates job pathways for low-income adults. Over the past decade, participants have gone from $18K to over $94K at companies like Uber, Blackstone, Citi, and Peloton.</p>
+            <p style="margin-top: 1em;">In the past year we've transformed into an AI-native organization—training participants for AI jobs and piloting programs for other non-profits and SMBs.</p>
           </div>
           <div class="project-partners">
             <span class="project-partners-label">Select Funders &amp; Partners</span>
@@ -865,7 +930,7 @@
               <img src="images/logo-blackstone.png" alt="Blackstone" class="logo-invert">
               <img src="images/logo-usv.png" alt="USV" class="logo-invert">
             </div>
-            <span class="project-partners-label" style="margin-top: 14px;">Featured Press</span>
+            <span class="project-partners-label">Featured Press</span>
             <div class="project-partners-logos">
               <img src="images/logo-nyt.png" alt="The New York Times">
               <img src="images/logo-techcrunch.png" alt="TechCrunch" class="logo-invert">
@@ -943,8 +1008,8 @@
       <div class="project-content">
         <span class="project-number">04</span>
         <h2 class="project-title">Pursuit Platform: Our AI-powered LMS <span style="font-size:0.62em;font-weight:300;color:#bbb;letter-spacing:0.01em">beta</span></h2>
-        <p class="project-description">We run an in-person program, but it's powered by software—an all-in-one learning and career management system that guides participants from onboarding through job placement with AI-powered daily learning, attendance tracking, assessments, and a built-in job search tracker. Staff get real-time dashboards and analytics across every cohort, while builders stay on track with personalized goal-setting, networking tools, and progress visibility throughout the program.</p>
-        <p class="project-description">This has been an org-wide initiative and experiment in “Everyone Builds”—where not just the product team but all members of the team actively contribute code to the build. We've cut our SaaS spending in half, and 78% of non-technical staff have contributed code.</p>
+        <p class="project-description">We run an in-person program powered by software—an all-in-one learning and career platform from onboarding through job placement, with AI-powered daily learning, attendance, assessments, and job search tracking. Staff get real-time dashboards across every cohort; builders get personalized goals, networking tools, and progress visibility.</p>
+        <p class="project-description">This grew from an org-wide “Everyone Builds” experiment: not just product, but the whole team contributing code. We've cut SaaS spend in half, and 78% of non-technical staff have shipped code.</p>
         <a href="https://www.pursuit.org/blog/2025-builds" target="_blank" rel="noopener" class="project-link-btn">Read More →</a>
       </div>
     </article>
